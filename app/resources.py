@@ -35,7 +35,7 @@ class RegisterUser(Resource):
         if username and password:
             if not auth.valid_username(username):
               user = User(username, password)
-              return (messages["registered"], 201) if user.save() else (messages["not_registered"], 400)
+              return (messages["registered"], 201) if save_model(user) else (messages["not_registered"], 400)
             else:
               return messages["user_exist"], 406
         else:
@@ -111,7 +111,7 @@ class AllBucketLists(Resource):
                 return {"message": "Saved",
                         "name": name,
                         "created_by": current_user
-                        } if bucketlist.save() \
+                        } if save_model(bucketlist) \
                         else messages["bucketlist_not_saved"], 400
         else:
             return messages["no_bucketlist_name"], 400
@@ -131,7 +131,7 @@ class AllBucketListItems(Resource):
                 return {"message": "Saved",
                         "name": name,
                         "bucketlist_id": id
-                                } if bucketlist_item.save() \
+                                } if save_model(bucketlist_item) \
                     else messages["bucketlist_item_not_saved"], 400
         else:
             return messages["no_bucketlist_item_name"], 400

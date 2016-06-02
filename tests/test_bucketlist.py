@@ -45,6 +45,16 @@ class TestBucketList(unittest.TestCase):
             "/bucketlists/", data={"name": "BucketList1"})
         self.assertEqual(self.bucketlist_request.status_code, 401)
 
+    def create_bucketlist_item(self):
+        self.create_bucketlist()
+        bucketlist_id = BucketList.query.filter_by(
+            name="BucketList1").first().id
+        self.bucketlist_item_request = self.app.post("/bucketlists/{}/items/".format(bucketlist_id),
+                                                     data={
+                                                         "name": "I want to buy a Ferrarri"},
+                                                     headers={"Token": self.token})
+
+
     def create_bucketlist(self):
         self.login()
         self.app.post("/bucketlists/",

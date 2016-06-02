@@ -1,11 +1,18 @@
-from models import User, BucketListItem
-from flask import current_app
+from models import User, BucketListItem, db
+from flask import current_app, jsonify, request
 from flask.ext.api.exceptions import AuthenticationFailed, PermissionDenied, \
     NotFound
 import jwt
-from flask import jsonify, request
 from flask_restful import reqparse, abort
 
+
+def save_model(self):      
+        try:
+            db.session.add(self)
+            db.session.commit()
+            return True
+        except:
+            return False
 
 def get_current_user_id(token):
     try:
@@ -36,18 +43,6 @@ def get_all_bucketlist_item(bucketlist_id):
     bucketlist_item_output = [get_single_bucketlist_item(bucketlist_item) for bucketlist_item in all_bucketlist_item]
     return bucketlist_item_output  
         
-def validate_args(fields={}):
-    """
-    This method helps to parse and validate provided parameters.
-    It will return parsed argument if the required fields are in request
-    """
-    parser = reqparse.RequestParser()
-    for field in fields.keys():
-        help_message = field + ' can not be blank'
-        parser.add_argument(field, required=fields[field], help=help_message)
-
-    return parser.parse_args()
-
 messages = {"username_not_found": {"message": "username does not exist"},
             "password_incorrect": {"message": "Password incorrect"},
             "authentication_failed": {"message": "Authentication Failed. Please try again"},

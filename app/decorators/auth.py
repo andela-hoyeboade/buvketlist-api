@@ -63,7 +63,7 @@ def bucketlist_item_exist(f):
         item_id = kwargs.get('item_id')
         bucketlist_item = BucketListItem.query.filter_by(id=item_id,bucketlist_id=bucketlist_id).first()
         try:
-            assert bucketlist_item is not None
+            assert bucketlist_item
         except:
             abort(400, message="Buckelist Item does not exist")
         return f(*args, **kwargs)
