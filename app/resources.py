@@ -1,7 +1,7 @@
 import json
 
 from flask import jsonify, request
-from flask.ext.restful import Resource, marshal
+from flask.ext.restful import Resource
 
 from .decorators import auth
 from .helpers import *
