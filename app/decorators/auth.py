@@ -20,7 +20,7 @@ def valid_password(username, password):
     """Returns True if username and password exist and False if otherwise
     """
     return True if User.query.filter_by(username=username,
-                                        password=hashlib.sha512(password).hexdigest()).first() else False
+        password=hashlib.sha512(password).hexdigest()).first() else False
 
 
 def user_is_login(f):
@@ -30,9 +30,8 @@ def user_is_login(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         try:
-            token = request.headers.get('Token')
-            secret_key = current_app.config.get('SECRET_KEY')
-            decoded = jwt.decode(token, secret_key)
+            decoded = jwt.decode(request.headers.get('Token'),
+                current_app.config.get('SECRET_KEY'))
         except:
             abort(401, message='Cannot authenticate user. Invalid Token')
         return f(*args, **kwargs)
@@ -45,13 +44,10 @@ def bucketlist_exist(f):
     """
     @wraps(f)
     def decorated(*args, **kwargs):
-        bucketlist_id = kwargs.get('id')
-        token = request.headers.get('Token')
-        current_user = get_current_user_id(token)
-        bucketlist = BucketList.query.filter_by(
-            id=bucketlist_id, created_by=current_user).first()
+        current_user = get_current_user_id(request.headers.get('Token'))
         try:
-            assert bucketlist
+            assert BucketList.query.filter_by(
+                id=kwargs.get('id'), created_by=current_user).first()
         except:
             abort(400, message='Bucketlist does not exist')
         return f(*args, **kwargs)
@@ -64,12 +60,9 @@ def bucketlist_item_exist(f):
     """
     @wraps(f)
     def decorated(*args, **kwargs):
-        bucketlist_id = kwargs.get('id')
-        item_id = kwargs.get('item_id')
-        bucketlist_item = BucketListItem.query.filter_by(
-            id=item_id, bucketlist_id=bucketlist_id).first()
         try:
-            assert bucketlist_item
+            assert BucketListItem.query.filter_by(id=kwargs.get('item_id'),
+                bucketlist_id=kwargs.get('id')).first()
         except:
             abort(400, message='Buckelist Item does not exist')
         return f(*args, **kwargs)
