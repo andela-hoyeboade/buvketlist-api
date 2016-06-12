@@ -194,11 +194,9 @@ class AllBucketLists(Resource):
                 return messages['bucketlist_exist'], 400
             else:
                 bucketlist = BucketList(name, current_user)
-                return {'message': 'Saved',
-                        'name': name,
-                        'created_by': current_user
-                        } if save_model(bucketlist) \
-                    else messages['bucketlist_not_saved'], 400
+                return (save_resource_msg({'name': name, \
+                    'created_by': current_user }), 200) if save_model(bucketlist) \
+                    else (messages['bucketlist_not_saved'], 400)
         else:
             return messages['no_bucketlist_name'], 400
 
@@ -234,11 +232,9 @@ class AllBucketListItems(Resource):
                 return messages['bucketlist_item_exist'], 400
             else:
                 bucketlist_item = BucketListItem(name=name, bucketlist_id=id)
-                return {'message': 'Saved',
-                        'name': name,
-                        'bucketlist_id': id,
-                        } if save_model(bucketlist_item) \
-                    else messages['bucketlist_item_not_saved'], 400
+                return (save_resource_msg({'name': name, 'bucketlist_id': id,
+                        }), 200) if save_model(bucketlist_item) \
+                    else (messages['bucketlist_item_not_saved'], 400)
         else:
             return messages['no_bucketlist_item_name'], 400
 
@@ -304,7 +300,7 @@ class SingleBucketListItem(Resource):
         bucketlist_item = BucketListItem.query.filter_by(
             id=item_id, bucketlist_id=id).first()
         return jsonify({'items': get_single_bucketlist_item(bucketlist_item)})
-        
+
     @auth.user_is_login
     @auth.bucketlist_exist
     @auth.bucketlist_item_exist
