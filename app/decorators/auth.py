@@ -1,15 +1,12 @@
-from app.models import User, BucketList, BucketListItem, db
-from flask_restful import reqparse, abort
-from functools import wraps
-from app.helpers import *
-from flask import request
-from flask import jsonify, current_app
-from datetime import datetime, timedelta
-from flask.ext.sqlalchemy import sqlalchemy as S
-from flask.ext.api.exceptions import AuthenticationFailed, PermissionDenied, \
-    NotFound
-import jwt
 import hashlib
+import jwt
+
+from flask import current_app, request
+from flask_restful import abort
+from functools import wraps
+
+from app.helpers import get_current_user_id
+from app.models import User, BucketList, BucketListItem
 
 
 def valid_username(username):
