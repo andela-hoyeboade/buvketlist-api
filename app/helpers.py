@@ -82,28 +82,44 @@ def save_model(model):
 
 messages = {'username_not_found': {'message': 'username does not exist'},
             'password_incorrect': {'message': 'Password incorrect'},
-            'authentication_failed': {'message': 'Authentication Failed. Please try again'},
+            'authentication_failed': {'message': \
+                'Authentication Failed. Please try again'},
             'bucketlist_updated': {'message': 'Bucketlist updated'},
             'bucketlist_not_updated': {'message': 'Bucketlist not updated'},
             'bucketlist_not_exist': {'message': 'Bucketlist does not exist'},
             'bucketlist_exist': {'message': 'Bucketlist already exist'},
             'no_bucketlist': {'message': 'Cannot locate any bucketlist'},
-            'user_pass_blank': {'message': 'Username or Password cannot be blank'},
-            'registered': {'message': 'You have been registered. Please login'},
-            'not_registered': {'message': 'Unable to register user. Please try again'},
+            'user_pass_blank': \
+                {'message': 'Username or Password cannot be blank'},
+            'registered': \
+                {'message': 'You have been registered. Please login'},
+            'not_registered': \
+                {'message': 'Unable to register user. Please try again'},
             'user_exist': {'message': 'Username already exists'},
-            'bucketlist_not_saved':{'message' 'Unable to save bucketlist. Please try again'},
-             'no_bucketlist_name':{'message': 'Please supply bucketlist name'},
-             'bucketlist_not_deleted': {'message': 'Unable to delete the bucketlist'},
-              'bucketlist_deleted': {'message': 'Bucketlist deleted'},
-              'bucketlist_updated': {'message': 'Bucketlist updated'},
-            'bucketlist_item_not_updated': {'message': 'Bucketlist item not updated'},
-            'bucketlist_item_not_exist': {'message': 'Bucketlist item does not exist'},
-            'bucketlist_item_exist': {'message': 'Bucketlist item already exist'},
-            'no_bucketlist_item': {'message': 'Cannot locate any bucketlist items'},
-            'bucketlist_item_not_saved':{'message' 'Unable to save bucketlist item. Please try again'},
-             'no_bucketlist_item_name':{'message': 'Please supply name for your bucketlist item'},
-             'bucketlist_item_not_deleted': {'message': 'Unable to delete bucketlist item'},
-              'bucketlist_item_deleted': {'message': 'Bucketlist item deleted'},
-              'bucketlist_item_updated': {'message': 'Bucketlist item updated'},
-              'resource_not_found': 'Error: Cannot locate requested item or resource'}
+            'bucketlist_not_saved': \
+                {'message': 'Unable to save bucketlist. Please try again'},
+            'no_bucketlist_name': {'message':'Please supply bucketlist name'},
+            'bucketlist_not_deleted': \
+                {'message': 'Unable to delete the bucketlist'},
+            'bucketlist_deleted': {'message': 'Bucketlist deleted'},
+            'bucketlist_updated': {'message': 'Bucketlist updated'},
+            'bucketlist_item_not_updated': \
+                {'message': 'Bucketlist item not updated'},
+            'bucketlist_item_not_exist': \
+                {'message': 'Bucketlist item does not exist'},
+            'bucketlist_item_exist': \
+                {'message': 'Bucketlist item already exist'},
+            'no_bucketlist_item': \
+                {'message': 'Cannot locate any bucketlist items'},
+            'bucketlist_item_not_saved': \
+                {'message':'Unable to save bucketlist item.Please try again'},
+             'no_bucketlist_item_name': \
+                {'message': 'Please supply name for your bucketlist item'},
+             'bucketlist_item_not_deleted': \
+                {'message': 'Unable to delete bucketlist item'},
+              'bucketlist_item_deleted': \
+                {'message': 'Bucketlist item deleted'},
+              'bucketlist_item_updated': \
+                {'message': 'Bucketlist item updated'},
+              'resource_not_found': \
+                'Error: Cannot locate requested item or resource'}
