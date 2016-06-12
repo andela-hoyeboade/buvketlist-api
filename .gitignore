@@ -7,5 +7,5 @@
 *.ini
 */tests/*.pyc
 */app/*.pyc
-*.coverage
-*.coveragerc
+.coverage
+.coveragerc
