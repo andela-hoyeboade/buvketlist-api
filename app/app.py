@@ -15,11 +15,13 @@ api.add_resource(RegisterUser, 'auth/register')
 api.add_resource(AllBucketLists, 'bucketlists/')
 api.add_resource(SingleBucketList, 'bucketlists/<int:id>')
 api.add_resource(AllBucketListItems, 'bucketlists/<int:id>/items/')
-api.add_resource(SingleBucketListItem, 'bucketlists/<int:id>/items/<int:item_id>')
+api.add_resource(SingleBucketListItem,
+    'bucketlists/<int:id>/items/<int:item_id>')
 
 @app.route('/', methods = ['GET','POST'])
-def home_page(): 
-    return 'Hello World! Welcome to BucketList Manager. Please login/register to access our services'
+def home_page():
+    return 'Hello World! Welcome to BucketList Manager. \
+        Please login/register to access our services'
 
 @app.errorhandler(404)
 def handle_error(message):
