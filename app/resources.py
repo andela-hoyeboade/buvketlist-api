@@ -103,12 +103,12 @@ class SingleBucketList(Resource):
             json: message indicating Bucketlist has been updated
         '''
         name = request.form.get('name')
-        bucketlist = BucketList.query.filter_by(id=id).first()
         token = request.headers.get('Token')
         current_user = get_current_user_id(token)
         check_bucketlist_name = BucketList.query.filter_by(
             name=name, created_by=current_user).first()
         if not check_bucketlist_name:
+            bucketlist = BucketList.query.filter_by(id=id).first()
             bucketlist.name = name
             return (messages['bucketlist_updated'], 200) if update_database() \
                 else (messages['bucketlist_not_updated'], 400)
@@ -119,7 +119,7 @@ class SingleBucketList(Resource):
     @auth.bucketlist_exist
     def delete(self, id):
         '''
-        Delete the bucketlist using an id.
+        Delete the bucketlist with the specified id.
         Args:
             id: The id of the bucketlist to be deleted (required)
         Returns:
